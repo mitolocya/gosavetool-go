@@ -74,7 +74,7 @@ type Stats struct {
 }
 
 func isSpace(r rune) bool {
-	return unicode.IsSpace(r) || r == '﻿'
+	return unicode.IsSpace(r) || r == '\ufeff'
 }
 
 // Count returns the words, characters, lines, sentences and reading time of a text.

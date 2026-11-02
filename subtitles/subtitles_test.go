@@ -70,7 +70,7 @@ func TestTimes(t *testing.T) {
 	if _, ok := ToMs("nope"); ok {
 		t.Error("ToMs of something else")
 	}
-	if !IsVTT("﻿WEBVTT\n") {
+	if !IsVTT("\ufeffWEBVTT\n") {
 		t.Error("IsVTT with a byte order mark")
 	}
 }

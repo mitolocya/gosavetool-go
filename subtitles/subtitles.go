@@ -68,7 +68,7 @@ func FromMs(ms float64, sep byte) string {
 // Parse returns the cues of an SRT or WebVTT text. Headers, NOTE and STYLE blocks are skipped.
 func Parse(src string) []Cue {
 	// "\r\r\n" too: a file saved twice with Windows line endings
-	text := newlineRe.ReplaceAllString(strings.TrimPrefix(src, "﻿"), "\n")
+	text := newlineRe.ReplaceAllString(strings.TrimPrefix(src, "\ufeff"), "\n")
 	cues := []Cue{}
 	for _, block := range blockRe.Split(text, -1) {
 		lines := strings.Split(block, "\n")
@@ -88,7 +88,7 @@ func Parse(src string) []Cue {
 
 // IsVTT reports whether the text starts with the WEBVTT signature.
 func IsVTT(src string) bool {
-	return strings.HasPrefix(strings.TrimPrefix(src, "﻿"), "WEBVTT")
+	return strings.HasPrefix(strings.TrimPrefix(src, "\ufeff"), "WEBVTT")
 }
 
 // ToSRT writes cues as SRT, numbered from 1.
